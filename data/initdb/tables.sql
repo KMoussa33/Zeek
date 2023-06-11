@@ -22,8 +22,14 @@ CREATE TABLE lists
     release_date TIMESTAMP,
     developer TEXT,
     game_title TEXT NOT NULL UNIQUE,
+    user_id INT NOT NULL,
     PRIMARY KEY (id)
 );
+
+ALTER TABLE lists
+ADD CONSTRAINT fk_lists_users
+FOREIGN KEY (user_id)
+REFERENCES users;
 
 CREATE TABLE comments 
 (
@@ -32,7 +38,18 @@ CREATE TABLE comments
     private BOOLEAN,
     datetime TIMESTAMP NOT NULL,
     text_body TEXT NOT NULL,
+    list_id INT NOT NULL,
+    user_id INT NOT NULL,
     PRIMARY KEY (id)
 );
 
---ADD TABLES FOR ONE TO MANY RELATIONSHIPS
+ALTER TABLE comments
+ADD CONSTRAINT fk_comments_users
+FOREIGN KEY (user_id)
+REFERENCES users;
+
+ALTER TABLE comments
+ADD CONSTRAINT fk_comments_lists
+FOREIGN KEY (list_id)
+REFERENCES lists;
+
