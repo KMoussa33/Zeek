@@ -63,9 +63,9 @@ def main():
             user_id=random.randint(last_user.id - USER_COUNT + 1, last_user.id),
             private=fake.random.boolean(),
         )
-        db.session.add(last_tweet)
+        db.session.add(last_list)
 
-    # insert tweets
+    # insert lists
     db.session.commit()
 
 # run script
