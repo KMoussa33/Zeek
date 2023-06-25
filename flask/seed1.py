@@ -30,7 +30,8 @@ def random_passhash():
 
 def truncate_tables():
     """Delete all rows from database tables"""
-    db.session.execute(User.query.delete())
+    db.session.execute()
+    User.query.delete()
     List.query.delete()
     Comment.query.delete()
     Game.query.delete()
