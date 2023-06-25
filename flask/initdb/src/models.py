@@ -8,7 +8,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(128), unique=True, nullable=False)
     password = db.Column(db.String(128), nullable=False)
-    private = db.Column(db.Bool, nullable=False)
+    private = db.Column(db.Boolean, nullable=False)
     email = db.Column(db.String(128), unique=True, nullable=False)
     lists = db.relationship('List', back_populates = 'users')
     comments = db.relationship('Comment', back_populates= 'users')
@@ -30,7 +30,7 @@ class List(db.Model):
     __tablename__='lists'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(128), unique=True, nullable=False)
-    private = db.Column(db.Bool)
+    private = db.Column(db.Boolean)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     lists_users = db.relationship('User', back_populates='lists')
     comments = db.relationship('Comment', back_populates= 'lists')
@@ -57,7 +57,7 @@ class Comment(db.Model):
         default=datetime.datetime.utcnow,
         nullable=False
     )
-    private = db.Column(db.Bool)
+    private = db.Column(db.Boolean)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     list_id = db.Column(db.Integer, db.ForeignKey('lists.id'), nullable=False)
     comments_users = db.relationship('User', back_populates='comments')

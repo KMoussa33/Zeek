@@ -68,5 +68,33 @@ def main():
     # insert lists
     db.session.commit()
 
+    last_comment = None  # save last comment
+    for _ in range(COMMENT_COUNT):
+        last_comment = Comment(
+            content=fake.sentence(),
+            user_id=random.randint(last_user.id - USER_COUNT + 1, last_user.id),
+            list_id=random.randint(last_list.id - LIST_COUNT + 1, last_list.id)
+        )
+        db.session.add(last_comment)
+
+    # insert comments
+    db.session.commit()
+
+
+    last_game = None  # save last game
+    for _ in range(GAME_COUNT):
+        last_game = Game(
+            game_title=fake.random.words(5),
+            release_date=fake.date.past(2),
+            developer=fake.name.findName(),
+            genre=fake.lorem.words(1),
+            list_id=random.randint(last_list.id - LIST_COUNT + 1, last_list.id)
+        )
+        db.session.add(last_game)
+
+    # insert games
+    db.session.commit()
+
+
 # run script
 main()
