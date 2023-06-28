@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Nav from "./components/Nav";
+import Nav from "./components/Header";
 import LoginModal from "./components/loginModal";
 
 export default function RootLayout({ children }) {
