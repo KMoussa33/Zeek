@@ -4,7 +4,7 @@ import "../../styles/globals.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
-export default function Nav() {
+export default function Nav({ openModal }) {
   // toggle faBars for small to medium screens
   const [isOpen, setIsOpen] = useState(false);
 
@@ -43,7 +43,7 @@ export default function Nav() {
             <span className="close" onClick="searchToggle(this, event"></span>
           </div>
           <div>
-            <button>
+            <button onClick={openModal}>
               <FontAwesomeIcon icon="fa-solid fa-right-to-bracket" />
             </button>
           </div>
