@@ -31,9 +31,9 @@ def random_passhash():
 def truncate_tables():
     """Delete all rows from database tables"""
     # db.session.execute()
+    db.session.query(Comment).delete()
     db.session.query(List).delete()
     db.session.query(User).delete()
-    db.session.query(Comment).delete()
     db.session.query(Game).delete()
     db.session.commit()
 
@@ -74,7 +74,8 @@ def main():
         last_comment = Comment(
             content=fake.sentence(),
             user_id=random.randint(last_user.id - USER_COUNT + 1, last_user.id),
-            list_id=random.randint(last_list.id - LIST_COUNT + 1, last_list.id)
+            list_id=random.randint(last_list.id - LIST_COUNT + 1, last_list.id),
+            private=fake.boolean()
         )
         db.session.add(last_comment)
 
@@ -85,10 +86,10 @@ def main():
     last_game = None  # save last game
     for _ in range(GAME_COUNT):
         last_game = Game(
-            game_title=fake.random.words(5),
-            release_date=fake.date.past(2),
-            developer=fake.name.findName(),
-            genre=fake.lorem.words(1),
+            game_title=fake.paragraph(nb_sentences=1),
+            release_date=fake.date(),
+            developer=fake.name(),
+            genre=fake.sentence(nb_words=1, ext_word_list=['horror', 'fantasy', 'action', 'FPS', 'adventure']),
             list_id=random.randint(last_list.id - LIST_COUNT + 1, last_list.id)
         )
         db.session.add(last_game)

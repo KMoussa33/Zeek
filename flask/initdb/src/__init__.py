@@ -32,9 +32,9 @@ def create_app(test_config=None):
     migrate = Migrate(app, db)
 
     from .api import comments, games, lists, users
+    app.register_blueprint(users.bp)
+    app.register_blueprint(lists.bp)
     app.register_blueprint(comments.bp)
     app.register_blueprint(games.bp)
-    app.register_blueprint(lists.bp)
-    app.register_blueprint(users.bp)
 
     return app

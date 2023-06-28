@@ -10,8 +10,8 @@ class User(db.Model):
     password = db.Column(db.String(128), nullable=False)
     private = db.Column(db.Boolean, nullable=False)
     email = db.Column(db.String(128), unique=True, nullable=False)
-    users_lists = db.relationship('List')
-    users_comments = db.relationship('Comment')
+    users_lists = db.relationship('List', backref='users')
+    users_comments = db.relationship('Comment', backref='users')
 
     def __init__(self, username: str, password: str, private: bool, email: str):
         self.username = username
@@ -32,13 +32,14 @@ class List(db.Model):
     title = db.Column(db.String(128), unique=True, nullable=False)
     private = db.Column(db.Boolean)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    lists_users = db.relationship('User')
-    lists_comments = db.relationship('Comment')
-    lists_games = db.relationship('Game')
+    user = db.relationship('User', backref='lists')
+    lists_comments = db.relationship('Comment', backref='lists')
+    lists_games = db.relationship('Game', backref='lists')
 
-    def __init__(self, title: str, private: bool):
+    def __init__(self, title: str, private: bool, user_id: int):
         self.title = title
         self.private = private
+        self.user_id = user_id
 
     def serialize(self):
         return {
@@ -60,8 +61,8 @@ class Comment(db.Model):
     private = db.Column(db.Boolean)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     list_id = db.Column(db.Integer, db.ForeignKey('lists.id'), nullable=False)
-    comments_users = db.relationship('User')
-    comments_lists = db.relationship('List')
+    comments_users = db.relationship('User', backref='comments')
+    comments_lists = db.relationship('List', backref='comments')
 
     def __init__(self, content: str, user_id: int, private: bool, list_id: int):
         self.content = content
@@ -92,12 +93,14 @@ class Game(db.Model):
     developer = db.Column(db.String(128))
     genre = db.Column(db.String(128))
     list_id = db.Column(db.Integer, db.ForeignKey('lists.id'), nullable=False)
-    games_lists = db.relationship('List')
+    games_lists = db.relationship('List', backref='games')
 
-    def __init__(self, game_title: str, genre: str, list_id: int):
+    def __init__(self, game_title: str, genre: str, list_id: int, release_date: int, developer: str):
         self.game_title = game_title
         self.genre = genre
         self.list_id = list_id
+        self.release_date = release_date
+        self.developer = developer
 
     def serialize(self):
         return {
