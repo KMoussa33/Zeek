@@ -13,8 +13,8 @@ export default function Nav() {
   };
 
   return (
-    <nav>
-      <div>
+    <nav className="bg-white p-4">
+      <div className="container mx-auto px-4">
         <Link href="/">
           <h1>ZeeK</h1>
         </Link>
