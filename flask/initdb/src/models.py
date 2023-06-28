@@ -10,8 +10,8 @@ class User(db.Model):
     password = db.Column(db.String(128), nullable=False)
     private = db.Column(db.Boolean, nullable=False)
     email = db.Column(db.String(128), unique=True, nullable=False)
-    lists = db.relationship('List', back_populates = 'users')
-    comments = db.relationship('Comment', back_populates= 'users')
+    users_lists = db.relationship('List')
+    users_comments = db.relationship('Comment')
 
     def __init__(self, username: str, password: str, private: bool, email: str):
         self.username = username
@@ -32,9 +32,9 @@ class List(db.Model):
     title = db.Column(db.String(128), unique=True, nullable=False)
     private = db.Column(db.Boolean)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    lists_users = db.relationship('User', back_populates='lists')
-    comments = db.relationship('Comment', back_populates= 'lists')
-    games = db.relationship('Game', back_populates='lists')
+    lists_users = db.relationship('User')
+    lists_comments = db.relationship('Comment')
+    lists_games = db.relationship('Game')
 
     def __init__(self, title: str, private: bool):
         self.title = title
@@ -60,8 +60,8 @@ class Comment(db.Model):
     private = db.Column(db.Boolean)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     list_id = db.Column(db.Integer, db.ForeignKey('lists.id'), nullable=False)
-    comments_users = db.relationship('User', back_populates='comments')
-    comments_lists = db.relationship('List', back_populates='comments')
+    comments_users = db.relationship('User')
+    comments_lists = db.relationship('List')
 
     def __init__(self, content: str, user_id: int, private: bool, list_id: int):
         self.content = content
@@ -91,8 +91,8 @@ class Game(db.Model):
     )
     developer = db.Column(db.String(128))
     genre = db.Column(db.String(128))
-    list_id = db.Column(db.Integer, nullable=False)
-    games_lists = db.relationship('List', back_populates='games')
+    list_id = db.Column(db.Integer, db.ForeignKey('lists.id'), nullable=False)
+    games_lists = db.relationship('List')
 
     def __init__(self, game_title: str, genre: str, list_id: int):
         self.game_title = game_title

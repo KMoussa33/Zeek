@@ -30,11 +30,11 @@ def random_passhash():
 
 def truncate_tables():
     """Delete all rows from database tables"""
-    db.session.execute()
-    User.query.delete()
-    List.query.delete()
-    Comment.query.delete()
-    Game.query.delete()
+    # db.session.execute()
+    db.session.query(List).delete()
+    db.session.query(User).delete()
+    db.session.query(Comment).delete()
+    db.session.query(Game).delete()
     db.session.commit()
 
 def main():
@@ -49,8 +49,8 @@ def main():
         last_user = User(
             username=fake.unique.first_name().lower() + str(random.randint(1,150)),
             password=random_passhash(),
-            private=fake.random.boolean(),
-            email=fake.internet.email()
+            private=fake.boolean(),
+            email=fake.email()
         )
         db.session.add(last_user)
 
@@ -62,7 +62,7 @@ def main():
         last_list = List(
             title=fake.sentence(),
             user_id=random.randint(last_user.id - USER_COUNT + 1, last_user.id),
-            private=fake.random.boolean(),
+            private=fake.boolean(),
         )
         db.session.add(last_list)
 
