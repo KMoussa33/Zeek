@@ -1,24 +1,18 @@
-import React, { useState } from "react";
-import Nav from "./components/Header";
-import LoginModal from "./components/loginModal";
+import React from "react";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 export default function RootLayout({ children }) {
-  const [showModal, setShowModal] = useState(false);
-
-  const openModal = () => {
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-  };
-
   return (
     <html lang="en">
-      {/* Makes the loginModal open upon button click */}
-      <Nav openModal={openModal} />
-      <body>{children}</body>
-      {showModal && <LoginModal closeModal={closeModal} />}
+      <div className="flex flex-col min-h-screen max-w-2xl px-3 pt-5 pb-10">
+        <div className="flex-grow">
+          <Header />
+          <body className="my-0 py-10">{children}</body>
+        </div>
+        <Footer />
+      </div>
     </html>
   );
 }
