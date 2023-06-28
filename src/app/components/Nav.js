@@ -14,9 +14,11 @@ export default function Nav() {
 
   return (
     <nav className="bg-white p-4">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 flex justify-between items-center text-base">
         <Link href="/">
-          <h1>ZeeK</h1>
+          <h1 className="text-3xl font-light text-stone-700 cursor-pointer">
+            ZeeK
+          </h1>
         </Link>
         {/* hides fabars larger than medium screens */}
         <button className="md:hidden" onClick={toggleMenu}>
