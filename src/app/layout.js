@@ -1,7 +1,6 @@
 import React from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 export default function RootLayout({ children }) {
   return (
