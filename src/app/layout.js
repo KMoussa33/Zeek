@@ -5,7 +5,7 @@ import Footer from "./components/Footer";
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <div className="flex flex-col mx-auto ">
+      <div className="flex flex-col mx-auto bg-white">
         <div className="flex-grow">
           <Header />
           <main className="my-0 ">{children}</main>

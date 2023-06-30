@@ -1,5 +1,6 @@
 import Link from "next/link";
 import "../../styles/globals.css";
+import SearchField from "./SearchField";
 
 export default function Header() {
   return (
@@ -10,6 +11,7 @@ export default function Header() {
             ZeeK
           </h1>
         </Link>
+        <SearchField />
       </div>
     </nav>
   );
