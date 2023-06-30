@@ -1,34 +1,35 @@
 "use client";
 
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import "../../styles/globals.css";
 
 const SearchField = () => {
-  const [search, setSearch] = useState("");
-  const [showSearch, setShowSearch] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [inputValue, setInputValue] = useState("");
 
-  const searchToggle = () => {
-    setShowSearch(!showSearch); // Toggle the showSearch state
+  const searchToggle = (e) => {
+    if (e.target.className !== "input-holder") {
+      setIsActive(!isActive);
+    }
+    if (isActive && e.target.className !== "input-holder") {
+      setInputValue("");
+    }
   };
 
   return (
-    <div className="search-wrapper">
-      {showSearch && (
-        <div className="input-holder">
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="search-input"
-            placeholder="Type to search"
-          />
-        </div>
-      )}
-      <button onClick={searchToggle}>
-        <FontAwesomeIcon icon={faSearch} /> {/* Use the 'search' icon */}
-      </button>
+    <div className={`search-wrapper ${isActive ? "active" : ""}`}>
+      <div className="input-holder">
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Type to search"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+        />
+        <button className="search-icon" onClick={searchToggle}>
+          <span></span>
+        </button>
+      </div>
       <span className="close" onClick={searchToggle}></span>
     </div>
   );
