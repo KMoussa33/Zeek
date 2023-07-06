@@ -1,35 +1,35 @@
-"use client";
-
 import Link from "next/link";
-import { useState } from "react";
-import "../styles/globals.css";
+import HeaderNavLink from "./HeaderNavLink";
 import SearchField from "./SearchField";
-import LoginButton from "./LoginButton";
-import LoginModal from "./loginModal";
 
-export default function Header() {
-  const [modalOpen, setModalOpen] = useState(false);
+const menuItems = [
+  { label: `Home`, url: `/` },
+  { label: `Dashboard`, url: `/dashboard/account` },
+  { label: `Library`, url: `/dashboard/game_lib` },
+];
 
-  const handleOpenModal = () => {
-    setModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
-
+const Header = () => {
   return (
-    <nav className="bg-white p-4 relative">
-      <div className="container mx-auto px-4 flex justify-between items-center text-base">
+    <header className="flex flex-col gap-5 bg-white w-full">
+      <div className="flex items-center justify-between w-full">
         <Link href="/">
-          <h1 className="text-3xl font-light text-stone-700 cursor-pointer">
-            ZeeK
-          </h1>
+          <h1 className="text-gray-300 text-2xl">ZeeK</h1>
         </Link>
-        <LoginButton onClick={handleOpenModal} />
-        {modalOpen && <LoginModal handleClose={handleCloseModal} />}
-        <SearchField />
+        <nav className="ml-8">
+          <ul className="flex flex-wrap gap-x-8 text-gray-300">
+            {menuItems.map(({ url, label }, index) => (
+              <li key={index}>
+                <HeaderNavLink href={url}>{label}</HeaderNavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div className="right-0 top-2">
+          <SearchField />
+        </div>
       </div>
-    </nav>
+    </header>
   );
-}
+};
+
+export default Header;

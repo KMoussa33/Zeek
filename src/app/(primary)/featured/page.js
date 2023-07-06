@@ -1,14 +1,14 @@
 import React from "react";
 import Image from "next/image";
-import FF from "../../public/images/FF.jpg";
-import GoW from "../../public/images/gow_ragnarok.webp";
-import Pikmin from "../../public/images/pikmin4.jpg";
-import Pokemon from "../../public/images/PokemonScarlet.jpg";
-import SF6 from "../../public/images/SF6.webp";
-import SonicOP from "../../public/images/SonicOP.jpg";
-import Twilight from "../../public/images/Zelda_TOK.jpg";
+import FF from "../../../../public/images/FF.jpg";
+import GoW from "../../../../public/images/gow_ragnarok.webp";
+import Pikmin from "../../../../public/images/pikmin4.jpg";
+import Pokemon from "../../../../public/images/PokemonScarlet.jpg";
+import SF6 from "../../../../public/images/SF6.webp";
+import SonicOP from "../../../../public/images/SonicOP.jpg";
+import Twilight from "../../../../public/images/Zelda_TOK.jpg";
 
-export default function Home() {
+export default function Featured() {
   return (
     <div className="bg-white container mx-auto p-2">
       <div

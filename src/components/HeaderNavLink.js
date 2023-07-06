@@ -4,17 +4,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const HeaderNavLink = ({ href, children }) => {
-  const pathName = usePathname();
-  const active = href === pathName;
+  const pathname = usePathname();
+  const active = href === pathname;
 
   return (
     <Link
       href={href}
-      className={`hover:bg-purple-400 p-2 rounded block ${
+      className={`hover:bg-gray-100 p-2 rounded block ${
         active ||
-        (href.startsWith("/dashboard") && pathName.startsWith("/dashboard"))
-          ? "text-green-700 font-semibold"
-          : "text-purple-400"
+        (href.startsWith("/dashboard") && pathname.startsWith("/dashboard"))
+          ? "text-gray-200 font-semibold"
+          : "text-purple-300"
       }`}
     >
       {children}
