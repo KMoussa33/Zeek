@@ -56,7 +56,7 @@ const Footer = () => {
 
               {/* Kelsey LinkedIn */}
               <a
-                href="https://www.linkedin.com/in/kelsey-moussa-36a87a1a3/"
+                href="https://www.linkedin.com/in/kelsey-moussa/"
                 role="button"
                 className="text-2xl"
               >
