@@ -1,5 +1,5 @@
 -Create web crawler to load in game data
 -Remove Faker & connect web crawler to database
 -Utilize backend infrastructure methodologies to optimize query runtimes.
--Redis Cache for top game activity
+-Redis Cache for top game activity- How to apply this to each user. 
 -Update APIs
